@@ -22,7 +22,12 @@
     factory(window.jQuery, window.deparam, window.PubSub);
   }
 }(function ($, deparam, PubSub) {
-  var root = Function('return this')(); // jshint ignore:line
+  // remove Function(string) because of unsafe-eval is not allowed at chrome extension
+  // var root = Function('return this')(); // jshint ignore:line
+
+  var root = function() {
+    return this;
+  }();
 
   // singleton baby
   if (root.auth) {
